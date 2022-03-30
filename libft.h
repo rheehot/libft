@@ -13,13 +13,12 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-typedef struct      s_list
-{
-    void            *content;
-    struct s_list   *next;
-}                   t_list;
+# include <stdlib.h>
 
 size_t              ft_strlen(const char *s);
+
+char                *ft_strchr(const char *s, int c);
+char                *ft_strrchr(const char *s, int c);
 
 int                 ft_isalpha(int c);
 int                 ft_isdigit(int c);
