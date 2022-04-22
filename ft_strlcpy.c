@@ -17,6 +17,8 @@ size_t  ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsiz
 	size_t	i;
 
 	i = 0;
+    if (!src)
+        return (0);
     if (dstsize)
     {
         while (src[i] && i < dstsize - 1)

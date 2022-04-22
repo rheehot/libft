@@ -10,4 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
+char    *ft_strjoin(char const *s1, char const *s2)
+{
+    char    *tmp;
+    int     len;
+
+    len = strlen(s1) + strlen(s2) + 1;
+    if (!s1 || !s2 || !(tmp = (char *)malloc(len)))
+        return (NULL);
+    ft_memcpy(tmp, s1, ft_strlen(s1));
+    ft_strlcat(tmp, s2, len);
+    return (tmp);
+}
