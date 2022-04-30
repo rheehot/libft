@@ -12,4 +12,79 @@
 
 #include "libft.h"
 
+static size_t	ft_wordnum(const char *s, char c)
+{
+	size_t	count;
+
+	count = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			++count;
+			while (*s && *s != c)
+				++s;
+		}
+		else
+			++s;
+	}
+	return (count);
+}
+
+static void		ft_free(char **result, size_t word)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < word)
+	{
+		free(*(result + i));
+		i++;
+	}
+	free(result);
+}
+
+static int		ft_cutword(char const *s, char c, char **result, size_t word)
+{
+	size_t	idx1;
+	size_t	idx2;
+
+	idx1 = 0;
+	while (*(s + idx1))
+	{
+		if (*(s + idx1) == c)
+			idx1++;
+		else
+		{
+			idx2 = 0;
+			while (*(s + idx1 + idx2) != c && *(s + idx1 + idx2))
+				idx2++;
+			if (!(*(result + word) = (char *)malloc(idx2 + 1)))
+			{
+				ft_free(result, word);
+				return (0);
+			}
+			ft_memcpy(*(result + word), s + idx1, idx2);
+			*(*(result + word) + idx2) = 0;
+			idx1 += idx2;
+			word++;
+		}
+	}
+	return (1);
+}
+
 char	**ft_split(char const *s, char c)
+{
+	size_t	count;
+	char	**result;
+
+	if (!s)
+		return ((void *)0);
+	count = ft_wordnum(s, c);
+	if (!(result = (char **)malloc(sizeof(char *) * (count + 1))))
+		return (0);
+	*(result + count) = 0;
+	if (!ft_cutword(s, c, result, 0))
+		return (0);
+	return (result);
+}
