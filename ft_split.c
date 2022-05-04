@@ -81,7 +81,8 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return ((void *)0);
 	count = ft_wordnum(s, c);
-	if (!(result = (char **)malloc(sizeof(char *) * (count + 1))))
+	result = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!(result))
 		return (0);
 	*(result + count) = 0;
 	if (!ft_cutword(s, c, result, 0))
