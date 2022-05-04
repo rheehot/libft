@@ -12,13 +12,13 @@
 
 #include "libft.h"
 
-int ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int i;
-	int sign;
-	int res;
+	int	i;
+	int	sign;
+	int	res;
 
-	i   = 0;
+	i = 0;
 	sign = 1;
 	res = 0;
 	while (str[i] == ' ' || ('\t' <= str[i] && str[i] <= '\r'))

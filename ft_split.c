@@ -31,7 +31,7 @@ static size_t	ft_wordnum(const char *s, char c)
 	return (count);
 }
 
-static void		ft_free(char **result, size_t word)
+static void	ft_free(char **result, size_t word)
 {
 	size_t	i;
 
@@ -44,7 +44,7 @@ static void		ft_free(char **result, size_t word)
 	free(result);
 }
 
-static int		ft_cutword(char const *s, char c, char **result, size_t word)
+static int	ft_cutword(char const *s, char c, char **result, size_t word)
 {
 	size_t	idx1;
 	size_t	idx2;
@@ -59,15 +59,15 @@ static int		ft_cutword(char const *s, char c, char **result, size_t word)
 			idx2 = 0;
 			while (*(s + idx1 + idx2) != c && *(s + idx1 + idx2))
 				idx2++;
-			if (!(*(result + word) = (char *)malloc(idx2 + 1)))
+			*(result + word) = (char *)malloc(idx2 + 1);
+			if (!(*(result + word)))
 			{
 				ft_free(result, word);
 				return (0);
 			}
 			ft_memcpy(*(result + word), s + idx1, idx2);
-			*(*(result + word) + idx2) = 0;
+			*(*(result + (word++)) + idx2) = 0;
 			idx1 += idx2;
-			word++;
 		}
 	}
 	return (1);

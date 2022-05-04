@@ -26,7 +26,7 @@ static int	ft_digitcheck(int n)
 	count = 0;
 	if (!n)
 		return (1);
-	while(n)
+	while (n)
 	{
 		n = n / 10;
 		++count;
@@ -49,14 +49,15 @@ static void	ft_fillnum(unsigned int n, int digit, int sign, char	*result)
 
 char	*ft_itoa(int n)
 {
-	char	*result;
-	int	sign;
-	int	digit;
-	unsigned int abs;
-	
+	unsigned int	abs;
+	char			*result;
+	int				sign;
+	int				digit;
+
 	sign = ft_signcheck(n);
 	digit = ft_digitcheck(n);
-	if (!(result = (char *)malloc(sizeof(char)*(sign + digit + 1))))
+	result = (char *)malloc(sizeof(char) * (sign + digit + 1));
+	if (!(result))
 		return (NULL);
 	if (sign)
 		abs = -n;
