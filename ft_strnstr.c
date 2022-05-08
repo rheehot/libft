@@ -14,21 +14,16 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	size_t	nd_len;
 
-	if (!haystack || !needle)
+	nd_len = ft_strlen(needle);
+	if (!*needle)
 		return ((char *)haystack);
-	i = 0;
-	while (haystack[i] && i < len)
+	while (*haystack && nd_len <= len--)
 	{
-		j = 0;
-		while (haystack[i + j] && needle[j] && \
-		i + j < len && haystack[i + j] == needle[j])
-			++j;
-		if (!needle[j])
-			return ((char *)(haystack + i));
-		++i;
+		if (*haystack == *needle && !ft_memcmp(haystack, needle, nd_len))
+			return ((char *)haystack);
+		++haystack;
 	}
 	return (0);
 }
