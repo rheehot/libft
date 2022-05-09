@@ -6,11 +6,9 @@
 /*   By: taehooki <taehooki@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:31:54 by taehooki          #+#    #+#             */
-/*   Updated: 2022/03/15 15:31:55 by taehooki         ###   ########.fr       */
+/*   Updated: 2022/05/09 15:44:06 by taehooki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_toupper(int c)
 {
