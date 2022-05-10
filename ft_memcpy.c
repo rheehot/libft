@@ -14,9 +14,9 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	size_t	i;
+	int	i;
 
-	if (dst == NULL && src == NULL)
+	if (!dst && !src)
 		return (0);
 	i = -1;
 	while (++i < n)

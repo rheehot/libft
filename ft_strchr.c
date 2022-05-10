@@ -18,7 +18,7 @@ char	*ft_strchr(const char *s, int c)
 	{
 		if (!*s)
 			return (0);
-		s++;
+		++s;
 	}
 	return ((char *)s);
 }
