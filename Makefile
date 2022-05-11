@@ -58,32 +58,31 @@ SRCS_BONUS	= ft_lstsize.c \
 OBJS		=	$(SRCS:.c=.o)
 OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
 
-NAME		=	libft.a
-RM			=	rm -f
-LIB			=	ar rcu
-CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+NAME = libft.a
 
 ifdef WITH_BONUS
-	OBJ_SWITCH = $(OBJS_BONUS) 
+	OBJ_FILES = $(OBJS) $(OBJS_BONUS)
 else
-	OBJ_SWITCH = $(OBJS)
+	OBJ_FILES = $(OBJS)
 endif
 
-$(NAME)		:	$(OBJ_SWITCH)
-			$(LIB) $@ $^
+all : $(NAME)
 
-all			:	bonus $(NAME)
+%.o : %.c
+	gcc -Wall -Wextra -Werror -c -o $@ $<
 
-clean		:
-			$(RM) $(OBJS) $(OBJS_BONUS)
+$(NAME) : $(OBJ_FILES)
+	ar cr $@ $^
 
-fclean		:	clean
-			$(RM) $(NAME)
+bonus :
+	make WITH_BONUS=1 all
 
-re			:	fclean all
+clean :
+	rm -f $(OBJS) $(OBJS_BONUS)
 
-bonus		:
-			$(MAKE) WITH_BONUS=1 $(NAME)
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all
 
 .PHONY		:	all clean fclean re bonus
