@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	sign;
-	int	res;
+	int					i;
+	int					sign;
+	unsigned long long	res;
 
 	i = 0;
 	sign = 1;
@@ -30,9 +30,10 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	while (ft_isdigit(str[i]))
-	{
-		res = (res * 10) + (str[i] - '0');
-		i++;
-	}
+		res = (res * 10) + (str[i++] - '0');
+	if (res > LONG_MAX - 1 && sign == -1)
+		return (0);
+	if (res > LONG_MAX && sign == 1)
+		return (-1);
 	return (res * sign);
 }
