@@ -10,8 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= libft.a
-
 SRCS		= ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc.c \
@@ -47,7 +45,7 @@ SRCS		= ft_atoi.c \
 			ft_tolower.c \
 			ft_toupper.c
 
-BNS_SRCS	= ft_lstsize.c \
+SRCS_BONUS	= ft_lstsize.c \
 			ft_lstadd_back.c \
 			ft_lstadd_front.c \
 			ft_lstclear.c \
@@ -57,28 +55,35 @@ BNS_SRCS	= ft_lstsize.c \
 			ft_lstmap.c \
 			ft_lstnew.c
 
-OBJS		= $(SRCS:%.c=%.o)
+OBJS		=	$(SRCS:.c=.o)
+OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
 
-BNS_OBJS	= $(BNS_SRCS:%.c=%.o)
+NAME		=	libft.a
+RM			=	rm -f
+LIB			=	ar rcu
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra -Werror
 
-FLAGS		= -Wall -Wextra -Werror
+ifdef WITH_BONUS
+	OBJ_SWITCH = $(OBJS_BONUS) 
+else
+	OBJ_SWITCH = $(OBJS)
+endif
 
-$(NAME)	:	$(OBJS)
-		gcc $(FLAGS) -c $(SRCS) -I./
-		ar rc $(NAME) $(OBJS)
+$(NAME)		:	$(OBJ_SWITCH)
+			$(LIB) $@ $^
 
-all		:	$(NAME)
+all			:	bonus $(NAME)
 
-bonus	:	$(NAME)
-		gcc $(FLAGS) -c $(BNS_SRCS) -I./
-		ar rc $(NAME) $(BNS_OBJS)
+clean		:
+			$(RM) $(OBJS) $(OBJS_BONUS)
 
-clean	:
-		rm -f $(OBJS) $(BNS_OBJS)
+fclean		:	clean
+			$(RM) $(NAME)
 
-fclean	:	clean
-		rm -f $(NAME)
+re			:	fclean all
 
-re	:	fclean all
+bonus		:
+			$(MAKE) WITH_BONUS=1 $(NAME)
 
-.PHONY	:	all clean fclean re
+.PHONY		:	all clean fclean re bonus
