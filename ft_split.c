@@ -79,13 +79,13 @@ char	**ft_split(char const *s, char c)
 	char	**result;
 
 	if (!s)
-		return ((void *)0);
+		return (NULL);
 	count = ft_wordnum(s, c);
 	result = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!(result))
-		return (0);
-	*(result + count) = 0;
+		return (NULL);
+	*(result + count) = NULL;
 	if (!ft_cutword(s, c, result, 0))
-		return (0);
+		return (NULL);
 	return (result);
 }
