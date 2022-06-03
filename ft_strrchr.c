@@ -21,5 +21,5 @@ char	*ft_strrchr(const char *s, int c)
 		--len;
 	if (s[len] == (unsigned char)c)
 		return ((char *)(s + len));
-	return (0);
+	return (NULL);
 }
